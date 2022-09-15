@@ -21,3 +21,7 @@ eg printenv <img src="./printenv.png" alt="printenv">
 
 - set :- lists all local variables and environment variables, and functions.<br/>
 eg set <img src="set.png" alt="set">
+
+- export :- This is used to create a local variable. note to create a global variable, do not use export, just the variable name and value is fine. <br/>
+syntax is export variable_name=variable_value<br/>
+eg export SCHOOL=altschool <img src="export.png" alt="export">
