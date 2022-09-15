@@ -41,3 +41,7 @@ eg sort unsorted.txt <img src="sort.png" alt="sort">
 - rev :- This is to reverse the content of a file line after the other <br/>
 syntax :- rev [filename] <br/>
 eg rev unsorted.txt <img src=rev.png" alt="rev">
+
+- top : This displays all active processes<br/>
+syntax :-  top <br/>
+eg top <img src="top.png" alt="top">
