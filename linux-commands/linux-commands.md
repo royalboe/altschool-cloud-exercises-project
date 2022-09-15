@@ -37,3 +37,7 @@ eg '''wc execute''' <img src="wc.png" alt="wc">
 - sort :- this sorts the content of a file in ASCII order. The result can be piped into another file. <br/>
 syntax :- sort [filename]<br/>
 eg sort unsorted.txt <img src="sort.png" alt="sort">
+
+- rev :- This is to reverse the content of a file line after the other <br/>
+syntax :- rev [filename] <br/>
+eg rev unsorted.txt <img src=rev.png" alt="rev">
