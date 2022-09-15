@@ -25,3 +25,9 @@ eg set <img src="set.png" alt="set">
 - export :- This is used to create a local variable. note to create a global variable, do not use export, just the variable name and value is fine. <br/>
 syntax is export variable_name=variable_value<br/>
 eg export SCHOOL=altschool <img src="export.png" alt="export">
+
+- find : This is used to search the file directory for a file.<br/>
+syntax :- In its simplest form -- find -name <\filename/matches><br/>
+eg find -name "execute" <img src="find.png" alt="find">
+
+- 
