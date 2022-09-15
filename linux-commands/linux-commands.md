@@ -30,4 +30,7 @@ eg export SCHOOL=altschool <img src="export.png" alt="export">
 syntax :- In its simplest form -- find -name <\filename/matches><br/>
 eg find -name "execute" <img src="find.png" alt="find">
 
-- 
+- wc :- stands for word count. It is mainly used for counting purpose. It displays no of lines, words and characters in that order<br/>
+syntax :- '''wc [option] [file]''' <br/>
+eg '''wc execute''' <br/>
+<img src="wc.png" alt="wc">
