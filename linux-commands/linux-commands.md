@@ -15,3 +15,6 @@ eg to give owner the permission to run a file as an executable use chmod u+x fil
 Syntax is :- less <\filename> <br/>
 eg less execute <br/>
 <img src="./less.png" alt="less">
+
+- printenv :- to print out global variables<br/>
+eg printenv <img src="./printenv.png" alt="printenv">
