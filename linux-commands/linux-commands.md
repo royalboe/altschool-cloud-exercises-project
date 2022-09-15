@@ -16,5 +16,8 @@ Syntax is :- less <\filename> <br/>
 eg less execute <br/>
 <img src="./less.png" alt="less">
 
-- printenv :- to print out global variables<br/>
+- printenv :- to print out global environment variables<br/>
 eg printenv <img src="./printenv.png" alt="printenv">
+
+- set :- lists all local variables and environment variables, and functions.<br/>
+eg set <img src="set.png" alt="set">
