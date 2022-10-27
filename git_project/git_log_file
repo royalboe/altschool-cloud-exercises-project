@@ -1,8 +1,27 @@
+commit 14a5eb24789e642d0fd2e67a66ce7c2c000c780a
+Merge: 7f8581c 5a3026b
+Author: Ayomide <auomidejohnson@gmail.com>
+Date:   Wed Oct 26 20:58:39 2022 -0700
+
+    Merge branch 'main' of https://github.com/Royalboe/altschool-cloud-exercises-project into main
+
+commit 7f8581c8642d30bd66701e041b5f90f404cdcb0f
+Author: Ayomide <auomidejohnson@gmail.com>
+Date:   Wed Oct 26 20:58:31 2022 -0700
+
+    git log files
+
 commit 2cf911481a4dd118b658e829e9c36e6639c78120
 Author: Ayomide <auomidejohnson@gmail.com>
 Date:   Wed Oct 26 20:57:54 2022 -0700
 
     git tasks
+
+commit 5a3026bcc9a009f73255c7f53f559a7c87c62ebb
+Author: Royalboe <auomidejohnson@gmail.com>
+Date:   Thu Oct 27 04:54:46 2022 +0100
+
+    screenshot
 
 commit 9cd6b9e5ac11f84cb8b96ba56b45ddb9d48d9465
 Author: Ayomide <auomidejohnson@gmail.com>
