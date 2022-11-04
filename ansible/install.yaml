@@ -1,0 +1,37 @@
+---
+- name: setup Web Server
+  hosts: webservers
+  become: yes
+  remote_user: root
+
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Setting timezone to Africa/Lagos
+      community.general.timezone:
+        name: Africa/Lagos
+
+    - name: Install Apache and PHP
+      ansible.builtin.package:
+        name:
+          - apache2
+          - php
+          - libapache2-mod-php
+        state: present
+
+    - name: Copy php file
+      copy:
+        src: /home/vagrant/for_ansible/index.php
+        dest: /var/www/html/index.php
+        owner: root
+        group: root
+        mode: 0777
+
+    - name: restart apache service
+      service:
+        name: apache2
+        service: restarted

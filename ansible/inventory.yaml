@@ -1,0 +1,6 @@
+webservers:
+  hosts:
+    vm01:
+      ansible_host: 159.223.105.76
+    vm02:
+      ansible_host: 159.223.97.144
