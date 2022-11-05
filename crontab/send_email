@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+Subject="mailing you buddy.."
+MAIL_RECIPIENTS="auomidejohnson@gmail.com, kezzyfaithy@gmail.com"
+date >> new.txt
+echo "Hi beautiful, i hope this makes you smile" >> new.txt
+
+cat new.txt | mail -s "$Subject" $MAIL_RECIPIENTS

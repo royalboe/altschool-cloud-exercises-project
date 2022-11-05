@@ -1,0 +1,62 @@
+---
+
+- name: setup DB Server
+  hosts: dbservers
+  become: yes
+  remote_user: root
+
+  vars:
+    mysql_root_password: password
+    db_name: miniprojectdb
+
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Setting timezone to Africa/Lagos
+      community.general.timezone:
+        name: Africa/Lagos
+    
+    - name: install mysql
+      ansible.builtin.package: 
+        name: 
+          - mysql-server
+          - mysql-client
+          - python3-mysqldb
+          - libmysqlclient-dev
+        update_cache: yes 
+        state: present 
+
+    - name: Start up the mysql service
+      service: 
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Create mysql root password
+      community.mysql.mysql_user:
+        name: root
+        password: "{{ mysql_root_password }}"
+        host: '%'
+        state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        check_implicit_admin: yes
+        priv: "*.*:ALL,GRANT"
+
+    - name: Create a new database
+      community.mysql.mysql_db:
+        name: "{{ db_name }}"
+        state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+  handlers:
+    - name: Restart mysql
+      service:
+        name: mysql
+        state: restarted
+
