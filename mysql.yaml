@@ -1,7 +1,7 @@
 ---
 
 - name: setup DB Server
-  hosts: dbservers
+  hosts: webservers
   become: yes
   remote_user: root
 

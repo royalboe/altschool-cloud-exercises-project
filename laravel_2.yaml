@@ -46,7 +46,7 @@
       become: yes
 
     - name: set permissions for composer file
-      file:
+      ansible.builtin.file:
         path: /usr/local/bin/composer
         mode: a+x
         state: file
@@ -59,14 +59,14 @@
       become: yes
 
     - name: Take ownership of the application folder
-      file:
+      ansible.builtin.file:
         path: /var/www/html/myapp
         owner: "{{ ansible_effective_user_id }}"
         group: "{{ ansible_effective_group_id }}"
       become: yes
 
     - name: Set permission for the storage folder
-      file:
+      ansible.builtin.file:
         path: /var/www/html/myapp/storage
         state: directory
         recurse: yes
@@ -84,17 +84,17 @@
       become: yes
 
     - name: edit .env
-      replace:
+      ansible.builtin.replace:
         path: /var/www/html/myapp/.env
-        regexp: '$SERVER_IP'
-        replace: http://{{ ansible_host }}
+        regexp: 'SERVER_IP'
+        replace: 'http://159.89.234.237'
       become: yes
 
-    - name: edit .env
-      replace:
+    - name: input password in .env
+      ansible.builtin.replace:
         path: /var/www/html/myapp/.env
-        regexp: '$DB_PASSWORD'
-        replace: '{{ db_password }}'
+        regexp: 'DB_PASSWRD'
+        replace: 'password'
       become: yes
 
     - name: Install Laravel dependencies
@@ -118,8 +118,8 @@
     - name: set server name
       replace:
         path: /etc/apache2/sites-available/laravel.conf
-        regexp: '$SERVER_NAME'
-        replace: '{{ ansible_host }}'
+        regexp: 'SERVER_NAME'
+        replace: '159.89.234.237'
       become: yes
 
     - name: enable the new config
