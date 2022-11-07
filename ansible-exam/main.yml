@@ -1,0 +1,34 @@
+---
+
+- name: Install and configure mysql
+  hosts: servers
+  become: true
+  remote_user: root
+
+
+  tasks:
+    - include_role:
+        name: mysql
+
+- name: Install and configure laravel
+  hosts: servers
+  become: true
+  remote_user: root
+
+
+  tasks:
+    - include_role:
+        name: laravel
+
+- name: Ansible exam
+  hosts: servers
+  become: true
+  remote_user: root
+
+
+  tasks:
+    - include_role:
+        name: cert
+
+
+
