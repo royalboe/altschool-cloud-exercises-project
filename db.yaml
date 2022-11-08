@@ -1,0 +1,29 @@
+---
+  - name: Transfer and execute a script.
+    hosts: all
+    tasks:
+
+     - name: Copy and Execute the script 
+       script: /home/oscar/ansible/mypost.sh
+       become: yes
+
+     - name: edit .env
+       replace:
+        path: /var/www/html/myapp/.env
+        regexp: 'DB_DATABASE'
+        replace: 'miniprojectdb'
+        become: yes
+
+     - name: edit .env
+       replace:
+        path: /var/www/html/myapp/.env
+        regexp: 'DB_USERNAME'
+        replace: 'postgres'
+        become: yes
+  
+     - name: setup laravel
+       shell: |
+        cd /var/www/html/myapp
+        php artisan migrate
+       become: yes
+
