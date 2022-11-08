@@ -1,13 +1,13 @@
-- name: Upgrade System
+- name: Pre-task 1: Upgrade System
   apt: upgrade=dist update_cache=yes
   become: yes
 
-- name: Ensure some basic tools are installed.
-  ansible.builtin.apt:
-    name: aptitude,vim,ntp,ca-certificates,htop,rsync,open-vm-tools,gpg,sudo,iproute2,iptables,git,libnss-libvirt
+- name: Pre-task 2: Ensure some basic tools are installed.
+  ansible.builtin.package:
+    name: aptitude,vim,ntp,ca-certificates,htop,rsync,open-vm-tools,gpg,sudo,iproute2,iptables,git,libnss-libvirt,net-tools
     state: latest
 
-- name: "Create required directories in /etc/letsencrypt"
+- name: Create the required directories in /etc/letsencrypt
   ansible.builtin.file:
     path: "/etc/letsencrypt/{{ item }}"
     state: directory
@@ -21,7 +21,7 @@
   - keys
 
 - name: Ensure openssl requirements for lets encrypt are satisfied # Require openssl, PyOpenSSL
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: openssl
     state: latest
 
@@ -38,7 +38,7 @@
     state: latest
     when: ansible_python_version is version("3", "ge")
 
-- name: Generate a Let's Encrypt account key
+- name: "Generate a Let's Encrypt account key"
   community.crypto.openssl_privatekey:
     path: "{{ letsencrypt_account_key }}"
     type: RSA
@@ -94,3 +94,6 @@
     remaining_days: 14
     chain_dest: "{{ letsencrypt_certs_dir }}/{{ domain_name }}-intermediate.crt"
     data: "{{ letsencrypt_challenge }}"
+  
+  notify:
+    - name: restart service
