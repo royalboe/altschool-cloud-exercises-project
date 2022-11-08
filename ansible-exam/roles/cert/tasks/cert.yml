@@ -1,0 +1,35 @@
+---
+- name: Certificates
+  hosts: laravelservers
+  become: true
+  remote_user: root
+
+  vars_files:
+    - vars/config
+
+  tasks:
+
+    - name: Installing Snapd
+      ansible.builtin.package:
+        name: snapd
+
+    - name: Installing Core
+      community.general.snap:
+        name: core
+    
+    - name: Refreshing core
+      command: snap refresh core
+
+    - name: Installing certbot
+      community.general.snap:
+        name: certbot
+        classic: true
+
+    - name: configuring certbot
+      shell: sudo ln -s /snap/bin/certbot /usr/bin/certbot
+      args:
+        chdir: /usr/bin
+        creates: certbot
+
+    - name: Requesting SSL Certificate
+      shell: sudo certbot --apache --agree-tos -m auomidejohnson@gmail.com --non-interactive -d domain -d royalboe.live
