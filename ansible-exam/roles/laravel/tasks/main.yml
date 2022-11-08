@@ -61,8 +61,8 @@
     mode: "0777"
   become: yes
 
-- name: Rename and .env file
-  copy:
+- name: Rename .env.example to .env file
+  ansible.builtin.copy:
     src: /var/www/html/myapp/.env.example
     remote_src: yes
     dest: /var/www/html/myapp/.env
@@ -71,25 +71,46 @@
     mode: '0666'
   become: yes
 
-- name: edit .env
+- name: edit .env to insert ip-add into server ip
   ansible.builtin.replace:
     path: /var/www/html/myapp/.env
     regexp: 'SERVER_IP'
-    replace: 'http://178.128.42.86'
+    replace: "{{ ip_address }}" 
   become: yes
 
 - name: input database user in .env
   ansible.builtin.replace:
     path: /var/www/html/myapp/.env
     regexp: 'DB_USR'
-    replace: 'ayomide'
+    replace: "{{ db_username }}"
   become: yes
 
 - name: input password in .env
   ansible.builtin.replace:
     path: /var/www/html/myapp/.env
     regexp: 'DB_PASSWRD'
-    replace: 'ayomide'
+    replace: "{{ db_password }}"
+  become: yes
+
+- name: input dbname in .env
+  ansible.builtin.replace:
+    path: /var/www/html/myapp/.env
+    regexp: 'database_db'
+    replace: "{{ db_database }}"
+  become: yes
+
+- name: input port in .env
+  ansible.builtin.replace:
+    path: /var/www/html/myapp/.env
+    regexp: 'port_db'
+    replace: "{{ db_port }}"
+  become: yes
+
+- name: input connection in .env
+  ansible.builtin.replace:
+    path: /var/www/html/myapp/.env
+    regexp: 'conn_db'
+    replace: "{{ db_connection }}"
   become: yes
 
 - name: Install Laravel dependencies
@@ -113,7 +134,7 @@
 - name: copy laravel ssl config
   template:
     src: laravel-le-ssl.conf
-    dest: /etc/apache2/sites-available/laravel.conf
+    dest: /etc/apache2/sites-available/laravel-le-ssl.conf
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_group_id }}"
     mode: '0644'

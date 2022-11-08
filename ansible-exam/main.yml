@@ -1,7 +1,7 @@
 ---
 
 - name: Install and configure mysql
-  hosts: servers
+  hosts: prodservers
   become: true
   remote_user: root
 
@@ -11,7 +11,7 @@
         name: mysql
 
 - name: Install and configure laravel
-  hosts: servers
+  hosts: prodservers
   become: true
   remote_user: root
 
@@ -20,8 +20,8 @@
     - include_role:
         name: laravel
 
-- name: Ansible exam
-  hosts: servers
+- name: Certifcations
+  hosts: prodservers
   become: true
   remote_user: root
 

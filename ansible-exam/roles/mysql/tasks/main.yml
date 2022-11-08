@@ -19,7 +19,7 @@
     state: present
 
 - name: copy .conf file with mysql credentials
-  templates:
+  template:
     src: .my.cnf
     dest: /root/.my.cnf
     owner: root
@@ -28,8 +28,8 @@
 
 - name: Create mysql root password
   community.mysql.mysql_user:
-    name: ayomide
-    password: ayomide
+    name: "{{ db_username }}"
+    password: "{{ db_password }}"
     host: 'localhost'
     state: present
     login_user: root
@@ -41,7 +41,7 @@
 
 - name: Create a new database
   community.mysql.mysql_db:
-    name: 'miniprojectdb'
+    name: "{{ db_database }}"
     state: present
-    login_user: ayomide
-    login_password: 'ayomide'
+    login_user: "{{ db_username }}"
+    login_password: "{{ db_password }}"

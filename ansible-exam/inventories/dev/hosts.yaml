@@ -1,1 +1,5 @@
-ip-address
+
+prodservers:
+  hosts:
+    vm001:
+      ansible_host: 161.35.170.228
