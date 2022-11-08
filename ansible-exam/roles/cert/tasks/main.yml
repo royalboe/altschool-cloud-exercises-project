@@ -1,99 +1,25 @@
-- name: Pre-task 1: Upgrade System
-  apt: upgrade=dist update_cache=yes
-  become: yes
-
-- name: Pre-task 2: Ensure some basic tools are installed.
+---
+- name: Installing Snapd
   ansible.builtin.package:
-    name: aptitude,vim,ntp,ca-certificates,htop,rsync,open-vm-tools,gpg,sudo,iproute2,iptables,git,libnss-libvirt,net-tools
-    state: latest
+    name: snapd
 
-- name: Create the required directories in /etc/letsencrypt
-  ansible.builtin.file:
-    path: "/etc/letsencrypt/{{ item }}"
-    state: directory
-    owner: root
-    group: root
-    mode: u=rwx,g=x,o=x
-  with_items:
-  - account
-  - certs
-  - csrs
-  - keys
+- name: Installing Core
+  community.general.snap:
+    name: core
+    
+- name: Refreshing core
+  command: snap refresh core
 
-- name: Ensure openssl requirements for lets encrypt are satisfied # Require openssl, PyOpenSSL
-  ansible.builtin.package:
-    name: openssl
-    state: latest
+- name: Installing certbot
+  community.general.snap:
+    name: certbot
+    classic: true
 
-- name: Ensure python-openssl requirements are satisified (for a python2 install)
-  ansible.builtin.apt:
-    name: python-openssl
-    state: latest
-  when: ansible_python_version is version("3", "lt")
+- name: configuring certbot
+  shell: sudo ln -s /snap/bin/certbot /usr/bin/certbot
+  args:
+    chdir: /usr/bin
+    creates: certbot
 
-
-- name: Ensure python-openssl requirements are satisified (for a python3 install)
-  ansible.builtin.apt:
-  name: python3-openssl
-    state: latest
-    when: ansible_python_version is version("3", "ge")
-
-- name: "Generate a Let's Encrypt account key"
-  community.crypto.openssl_privatekey:
-    path: "{{ letsencrypt_account_key }}"
-    type: RSA
-    size: 4096
-
-- name: Generate a private key for {{ domain_name }}
-  community.crypto.openssl_privatekey:
-    path: "{{ letsencrypt_keys_dir }}/{{ domain_name }}.key"
-    type: RSA
-    size: 4096
-
-- name: Generate an OpenSSL Certificate Signing Request
-  community.crypto.openssl_csr:
-    path: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
-    privatekey_path: "{{ letsencrypt_keys_dir }}/{{ domain_name }}.key"
-    common_name: "{{ domain_name }}"
-
-
-- name: Create a challenge for {{ domain_name }} using a account key from a variable.
-  community.crypto.acme_certificate:
-    terms_agreed: "{{ acme_terms_agreed }}"
-    acme_version: "{{ acme_version }}"
-    acme_directory: "{{ acme_directory }}"
-    account_key_src: "{{ letsencrypt_account_key }}"
-    csr: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
-    dest: "{{ letsencrypt_certs_dir }}/{{ domain_name }}.crt"
-  register: letsencrypt_challenge
-
-- name: Create the required .well-known structure.
-  ansible.builtin.file:
-    dest: /var/www/html/myapp/public/.well-known/acme-challenge
-    mode: 0755
-    state: directory
-
-- name: Copy the challenge data to the web sever.
-  ansible.builtin.copy:
-    dest: /var/www/html/myapp/public/{{ letsencrypt_challenge['challenge_data'][domain_name]['http-01']['resource'] }}
-        content: "{{ letsencrypt_challenge['challenge_data'][domain_name]['http-01']['resource_value'] }}"
-     mode: 0644
-   when: letsencrypt_challenge is changed and domain_name in letsencrypt_challenge['challenge_data']
-
-- name: Create a challenge for {{ domain_name }} using a account key file.
-  community.crypto.acme_certificate:
-    acme_directory: "{{ acme_directory }}"
-    acme_version: "{{ acme_version }}"
-    account_key_src: "{{ letsencrypt_account_key }}"
-    account_email: "{{ acme_email }}"
-    terms_agreed: "{{ acme_terms_agreed }}"
-    challenge: "{{ acme_challenge_type }}"
-    src: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
-    cert: "{{ letsencrypt_certs_dir }}/{{ domain_name }}.crt"
-    llchain_dest: "{{ letsencrypt_certs_dir }}/fullchain_{{ domain_name }}.crt"
-    remaining_days: 14
-    chain_dest: "{{ letsencrypt_certs_dir }}/{{ domain_name }}-intermediate.crt"
-    data: "{{ letsencrypt_challenge }}"
-  
-  notify:
-    - name: restart service
+- name: Requesting SSL Certificate
+  shell: "sudo certbot --apache --agree-tos -m {{ email }} --non-interactive -d {{ domain_name }} -d www.{{ domain_name }}"
