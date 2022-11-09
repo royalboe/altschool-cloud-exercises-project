@@ -9,4 +9,5 @@ This folder contains ansible playbook to configure a server
 - The [roles](./roles) contains different plays for the playbook
 - The [hosts](./inventories/dev/hosts.yaml) contains ip address
 ## Domain name
-- My domain name is `[royalboe.live]`(https://royalboe.live)  
+- My domain name is [royalboe.live](https://royalboe.live) 
+- Endpoints [royalboe.live/api/articles](https://royalboe.live/api/articles) [royalboe.live/tags](https://royalboe.live/tags)
