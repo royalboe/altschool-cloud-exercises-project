@@ -1,34 +1,44 @@
 ---
 
+# Install and configure MySQL
 - name: Install and configure mysql
   hosts: prodservers
   become: true
   remote_user: root
 
-
   tasks:
     - include_role:
         name: mysql
 
+
+# Install Apache, PHP and clone the laravel application
 - name: Install and configure laravel
   hosts: prodservers
   become: true
   remote_user: root
 
-
   tasks:
     - include_role:
         name: laravel
 
+
+# Get TLS/SSL encryption
 - name: Certifcations
   hosts: prodservers
   become: true
   remote_user: root
-
 
   tasks:
     - include_role:
         name: cert
 
 
+# Install PostgreSQL
+- name: Install Postgresql
+  hosts: prodservers
+  become: true
+  remote_user: root
 
+  tasks:
+    - include_role:
+        name: postgres

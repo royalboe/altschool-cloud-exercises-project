@@ -1,0 +1,16 @@
+- name: Create a directory called script
+  ansible.builtin.file:
+    path: /root/script/
+    state: directory
+
+- name: Copy bash script
+  template:
+    src: postgres.sh
+    dest: /root/script
+    mode: '0777'
+    owner: root
+
+- name: run script
+  shell: |
+    cd /root/script
+    bash postgres.sh

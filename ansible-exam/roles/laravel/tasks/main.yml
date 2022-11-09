@@ -114,10 +114,10 @@
   become: yes
 
 - name: Install Laravel dependencies
-  composer:
-  # command: install
-    command: update
-    working_dir: /var/www/html/myapp
+  shell: |
+    cd /var/www/html/myapp
+    composer install
+  become: yes
   environment:
     COMPOSER_ALLOW_SUPERUSER: "1"
     COMPOSER_NO_INTERACTION: "1"
