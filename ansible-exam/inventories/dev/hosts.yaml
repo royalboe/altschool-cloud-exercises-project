@@ -2,6 +2,4 @@
 prodservers:
   hosts:
     vm001:
-      ansible_host: 134.209.127.23
-      
-      #161.35.170.228
+      ansible_host: 161.35.170.228

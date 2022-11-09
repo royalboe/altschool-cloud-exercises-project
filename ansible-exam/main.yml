@@ -6,7 +6,7 @@
   become: true
   remote_user: root
 
-  tasks:
+ tasks:
     - include_role:
         name: mysql
 
@@ -22,13 +22,23 @@
         name: laravel
 
 
+# Set firewall
+- name: Firewalls
+  hosts: prodservers
+  become: true
+  remote_user: root
+
+  tasks:
+    - include_role:
+        name: firewall
+
 # Get TLS/SSL encryption
 - name: Certifcations
   hosts: prodservers
   become: true
   remote_user: root
 
-  tasks:
+   tasks:
     - include_role:
         name: cert
 
