@@ -21,3 +21,6 @@ This folder contains ansible playbook to configure a server
 ## Domain name
 - My domain name is [royalboe.live](https://royalboe.live) 
 - Endpoints [royalboe.live/api/articles](https://royalboe.live/api/articles) [royalboe.live/tags](https://royalboe.live/api/tags)
+
+## TODOS
+- Encrypt db passwords with ansible vault
