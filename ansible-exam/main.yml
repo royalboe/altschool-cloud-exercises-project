@@ -6,7 +6,7 @@
   become: true
   remote_user: root
 
- tasks:
+  tasks:
     - include_role:
         name: mysql
 
@@ -38,7 +38,7 @@
   become: true
   remote_user: root
 
-   tasks:
+  tasks:
     - include_role:
         name: cert
 
