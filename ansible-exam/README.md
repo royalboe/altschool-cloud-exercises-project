@@ -14,7 +14,8 @@ This folder contains ansible playbook to configure a server
 - Make sure you are using ubuntu 22.04 or 20.04 and that the ram is one on above
 - Also run `sudo apt update -y` and `sudo apt upgrade -y` on your virtual VM then run `sudo shutdown -r` to reload your virtual VM before running ansible
 - Make sure ansible version is 2.9 or above
-- Install all ansible galaxy dependecies needed for sql modules and community.timedate modules on your local or control node
+- Install all ansible galaxy dependencies needed for sql modules and community.timedate modules on your local or control node
+- NOTE, you might also need to add the php repository on your virtual/ managed node before starting the playbook
 
 
 ## Domain name
