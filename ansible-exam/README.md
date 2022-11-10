@@ -11,7 +11,7 @@ This folder contains ansible playbook to configure a server
 - Edit the [hosts](./inventories/dev/hosts.yaml) and put your ip_address
 - Edit the [groups_var/all](./groups_var/all) and put your details
 - Edit the templates in laravel hosts and put your domain name in the lalavel.conf files
-- Make sure you are using ubuntu 22.04 or 20.04 and that the ram is one on above
+- Make sure you are using ubuntu 22.04 or 20.04 and that the ram is 1 GB or above
 - Also run `sudo apt update -y` and `sudo apt upgrade -y` on your virtual VM then run `sudo shutdown -r` to reload your virtual VM before running ansible
 - Make sure ansible version is 2.9 or above
 - Install all ansible galaxy dependencies needed for sql modules and community.timedate modules on your local or control node
@@ -23,4 +23,4 @@ This folder contains ansible playbook to configure a server
 - Endpoints [royalboe.live/api/articles](https://royalboe.live/api/articles) [royalboe.live/tags](https://royalboe.live/api/tags)
 
 ## TODOS
-- Encrypt db passwords with ansible vault
+- Encrypt db password with ansible vault
