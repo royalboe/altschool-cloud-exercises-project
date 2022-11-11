@@ -149,7 +149,7 @@
 - name: migrate database
   shell: |
     cd /var/www/html/myapp
-    php artisan migrate
+    php artisan migrate --seed
   become: yes
 
 - name: enable the new configuration
