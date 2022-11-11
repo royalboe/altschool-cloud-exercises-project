@@ -16,8 +16,13 @@ This folder contains ansible playbook to configure a server
 - Make sure ansible version is 2.9 or above
 - Install all ansible galaxy dependencies needed for sql modules and community.timedate modules on your local or control node
 - NOTE, you might also need to add the php repository on your virtual/ managed node before starting the playbook
+- NOTE, there are times the snap recore webpage is down, this might affect the generation of the certificate. You might need to rerun it to make it work 
 
-
+## Stack
+- The application is built using laravel web framework
+- DBMS is postgresql
+- Apache2 webserver
+- Linux Operating System ; Ubuntu 22.04 distributions
 ## Domain name
 - My domain name is [royalboe.live](https://royalboe.live) 
 - Endpoints [royalboe.live/api/articles](https://royalboe.live/api/articles) [royalboe.live/tags](https://royalboe.live/api/tags)
