@@ -1,36 +1,36 @@
 ---
 
 # Install and configure MySQL
-- name: Install and configure mysql
-  hosts: prodservers
-  become: true
-  remote_user: root
+#- name: Install and configure mysql
+#  hosts: prodservers
+#  become: true
+#  remote_user: root
 
-  tasks:
-    - include_role:
-        name: mysql
+#  tasks:
+#    - include_role:
+#        name: mysql
 
 
 # Install Apache, PHP and clone the laravel application
-- name: Install and configure laravel
-  hosts: prodservers
-  become: true
-  remote_user: root
+#- name: Install and configure laravel
+#  hosts: prodservers
+#  become: true
+#  remote_user: root
 
-  tasks:
-    - include_role:
-        name: laravel
+#  tasks:
+#    - include_role:
+#        name: laravel
 
 
 # Set firewall
-- name: Firewalls
-  hosts: prodservers
-  become: true
-  remote_user: root
+#- name: Firewalls
+#  hosts: prodservers
+#  become: true
+#  remote_user: root
 
-  tasks:
-    - include_role:
-        name: firewall
+#  tasks:
+#    - include_role:
+#        name: firewall
 
 # Get TLS/SSL encryption
 - name: Certifcations
@@ -44,11 +44,11 @@
 
 
 # Install PostgreSQL
-- name: Install Postgresql
-  hosts: prodservers
-  become: true
-  remote_user: root
+#- name: Install Postgresql
+#  hosts: prodservers
+#  become: true
+#  remote_user: root
 
-  tasks:
-    - include_role:
-        name: postgres
+#  tasks:
+#    - include_role:
+#        name: postgres
