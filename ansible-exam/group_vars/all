@@ -14,7 +14,7 @@ domain_name: royalboe.live
 repos: "https://github.com/Royalboe/laravel-realworld-example-app.git"
 db_password: ayomide
 db_username: ayomide
-ip_address: http://165.227.227.214
+ip_address: http://159.223.105.133
 server_document_root: "/var/www/html/myapp/public"
 db_database: laraveldb
 db_port: 3306

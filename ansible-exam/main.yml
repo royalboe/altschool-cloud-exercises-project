@@ -41,7 +41,7 @@
     - include_role:
         name: firewall
 
- Get TLS/SSL encryption
+# Get TLS/SSL encryption
 - name: Certifcations
   hosts: prodservers
   become: true
